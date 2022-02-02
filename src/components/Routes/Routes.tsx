@@ -23,6 +23,7 @@ function RoutesMain() {
             <Routes>
 
                 <Route path='/' element={<Home/>}/>
+                <Route path='/Frisay' element={<Home/>}/>
                 <Route path={PATH.LOGIN} element={<Login/>}/>
                 <Route path={PATH.PROFILE} element={<Profile/>}/>
                 <Route path={PATH.REGISTRATION} element={<Registration/>}/>

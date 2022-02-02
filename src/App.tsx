@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
 import RoutesMain from "./components/Routes/Routes";
-import {BrowserRouter, NavLink} from "react-router-dom";
+import {BrowserRouter, HashRouter, NavLink} from "react-router-dom";
 
 function App() {
     return (
 
         <div className="App">
-            <BrowserRouter>
+            <HashRouter>
                 <header className="App-header">
 
                     <RoutesMain/>
@@ -19,7 +19,7 @@ function App() {
                     <NavLink to={'/Registration'}> Registration </NavLink>
                     <NavLink to={'/Test'}> Test </NavLink>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         </div>
     );
 }
