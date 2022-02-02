@@ -1,0 +1,14 @@
+.default {
+    background: yellow;
+    height: 50px;
+    width: 50px;
+}
+
+.red {
+    background: red;
+}
+
+.default:disabled {
+    background: white;
+    color: mediumslateblue;
+}
