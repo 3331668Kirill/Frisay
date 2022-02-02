@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Frisay/static/css/main.b72c03ff.css",
+    "main.js": "/Frisay/static/js/main.e2daccb0.js",
+    "static/js/787.28cb0dcd.chunk.js": "/Frisay/static/js/787.28cb0dcd.chunk.js",
+    "static/media/404-page-not-found.jpg": "/Frisay/static/media/404-page-not-found.44f968b5b37b520269b3.jpg",
+    "index.html": "/Frisay/index.html",
+    "main.b72c03ff.css.map": "/Frisay/static/css/main.b72c03ff.css.map",
+    "main.e2daccb0.js.map": "/Frisay/static/js/main.e2daccb0.js.map",
+    "787.28cb0dcd.chunk.js.map": "/Frisay/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b72c03ff.css",
+    "static/js/main.e2daccb0.js"
+  ]
+}
