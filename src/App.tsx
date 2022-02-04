@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import RoutesMain from "./components/Routes/Routes";
-import {BrowserRouter, HashRouter, NavLink} from "react-router-dom";
+import { HashRouter, NavLink} from "react-router-dom";
 
 function App() {
     return (
