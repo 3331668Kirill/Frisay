@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import SuperInputText from "../../components/SuperComponents/SuperInputText/SuperInputText";
 import SuperCheckbox from "../../components/SuperComponents/SuperCheckbox/SuperCheckbox";
 import SuperButton from "../../components/SuperComponents/SuperButton/SuperButton";
+import s from "./Login.module.css"
 
 const Login = () => {
 
@@ -26,7 +27,7 @@ const Login = () => {
         setRememberMe(checked)
     }
     return (
-        <div>
+        <div className={s.loginPage}>
             <SuperInputText placeholder='email' onChangeText={handleEmail}/>
             <SuperInputText placeholder='password' type='password' onChangeText={handlePassword}/>
             <SuperCheckbox onChangeChecked={handleRememberMe}>Remember Me</SuperCheckbox>
