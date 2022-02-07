@@ -6,7 +6,7 @@ export const Page404 = () => {
 
    return (
         <div>
-            <img src={pageNotFound} style={{height:'200px', width:'200px'}}/>
+            <img alt={"404"} src={pageNotFound} style={{height:'200px', width:'200px'}}/>
         </div>
     )
 }
