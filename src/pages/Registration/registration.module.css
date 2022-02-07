@@ -1,0 +1,28 @@
+.wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inputBlock{
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.inputBlock p{
+    margin: 0;
+}
+
+.buttonBlock{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+.buttonBlock :not(:last-child){
+    margin-right: 20px;
+}
+
