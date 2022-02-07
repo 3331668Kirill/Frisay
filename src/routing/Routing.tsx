@@ -1,11 +1,11 @@
 import React from 'react'
 import {Route, Routes} from "react-router-dom";
-import {Page404} from "../404/404";
-import {Home} from "../Home/Home";
-import {Login} from "../Login/Login";
-import {Profile} from "../Profile/Profile";
-import {Registration} from "../Registration/Registration";
-import {Test} from "../Test/Test";
+import {Page404} from "../pages/404/404";
+import {Home} from "../pages/Home/Home";
+import {Login} from "../pages/Login/Login";
+import {Profile} from "../pages/Profile/Profile";
+import {Registration} from "../pages/Registration/Registration";
+import {Test} from "../components/Test/Test";
 
 
 export const PATH = {
