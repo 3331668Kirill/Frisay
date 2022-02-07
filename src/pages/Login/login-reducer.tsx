@@ -1,5 +1,5 @@
 import {Dispatch} from "redux"
-import {userApi} from "../../api/api";
+import {api} from "../../api/api";
 
 export type UserInitialStateType = {
     _id: string
@@ -35,7 +35,7 @@ export const LoginAC = (data: UserInitialStateType) => {
 }
 
 export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
-    userApi.login({email, password, rememberMe}).then((res) => {
+    api.login({email, password, rememberMe}).then((res) => {
         dispatch(LoginAC(res.data))
     }).catch((err) => {
         console.log(err)
