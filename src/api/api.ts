@@ -5,6 +5,14 @@ type LoginPayloadType = {
     password: string
     rememberMe: boolean
 }
+type RecoverPassPayloadType = {
+    email:string
+    html1?:string
+    html2?:string
+    message:string
+    from:string
+}
+
 const instance = axios.create({
     baseURL: "http://localhost:7542/2.0/"
 })
@@ -12,5 +20,9 @@ const instance = axios.create({
 export const api = {
     login(payload: LoginPayloadType) {
         return instance.post(`auth/login`, {...payload})
-    }
+    },
+    recoverPass(payload:RecoverPassPayloadType){
+        //return axios.post('https://github.com/IgnatZakalinsky/cards-nya-back-2-0/auth/forgot', {...payload})
+        return instance.post('auth/forgot',{...payload})
+    },
 }
