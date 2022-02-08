@@ -22,7 +22,7 @@ export const api = {
         return instance.post(`auth/login`, {...payload})
     },
     recoverPass(payload:RecoverPassPayloadType){
-        //return axios.post('https://github.com/IgnatZakalinsky/cards-nya-back-2-0/auth/forgot', {...payload})
+        //return axios.post('https://neko-back.herokuapp.com/2.0/auth/forgot', {...payload})
         return instance.post('auth/forgot',{...payload})
     },
 }

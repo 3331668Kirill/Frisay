@@ -4,6 +4,7 @@ import SuperButton from "../../components/SuperComponents/SuperButton/SuperButto
 import {useDispatch, useSelector} from "react-redux";
 import {recoverPassTC} from "./recoverPass-reducer";
 import {AppRootStateType} from "../../redux/store";
+import {Navigate} from "react-router-dom";
 
 
 
@@ -29,7 +30,7 @@ export const RecoverPassword = () => {
             <p> Input your e-mail and we will send you further instractions</p>
             <SuperButton onClick={recoverPass}>Send instructions</SuperButton>
             {error && <div style={{color:'red'}}>{error}</div>}
-
+            {info && <Navigate to={'/'}/>}
         </div>
     )
 }
