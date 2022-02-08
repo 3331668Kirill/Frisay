@@ -17,6 +17,7 @@ function App() {
                     <NavLink to={'/login'}> Login </NavLink>
                     <NavLink to={'/profile'}> Profile </NavLink>
                     <NavLink to={'/Registration'}> Registration </NavLink>
+                    <NavLink to={'/recover-password'}> Forgot password </NavLink>
                     <NavLink to={'/Test'}> Test </NavLink>
                 </div>
             </HashRouter>
