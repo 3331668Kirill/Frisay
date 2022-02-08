@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "./login-reducer";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import SuperInputText from "../../components/SuperComponents/SuperInputText/SuperInputText";
 import SuperCheckbox from "../../components/SuperComponents/SuperCheckbox/SuperCheckbox";
 import SuperButton from "../../components/SuperComponents/SuperButton/SuperButton";
 import s from "./Login.module.css"
+import {AppRootStateType} from "../../redux/store";
 
 const Login = () => {
 
@@ -13,6 +14,7 @@ const Login = () => {
     const [password, setPassword] = useState<string>('')
     const [rememberMe, setRememberMe] = useState<boolean>(false)
     const dispatch = useDispatch();
+    const userId = useSelector<AppRootStateType, string>(state => state.login._id)
 
     const login = () => {
         dispatch(loginTC(email, password, rememberMe))
@@ -25,6 +27,10 @@ const Login = () => {
     }
     const handleRememberMe = (checked: boolean) => {
         setRememberMe(checked)
+    }
+
+    if (userId !== undefined) {
+        return <Navigate to='/profile'/>
     }
     return (
         <div className={s.loginPage}>
