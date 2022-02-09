@@ -2,10 +2,11 @@ import React from 'react'
 import {Route, Routes} from "react-router-dom";
 import {Page404} from "../pages/404/404";
 import {Home} from "../pages/Home/Home";
-import {Login} from "../pages/Login/Login";
 import {Profile} from "../pages/Profile/Profile";
 import {Registration} from "../pages/Registration/Registration";
 import {Test} from "../components/Test/Test";
+import Login from "../pages/Login/Login";
+import {RecoverPassword} from "../pages/RecoverPass/RecoverPassword";
 
 
 export const PATH = {
@@ -13,6 +14,7 @@ export const PATH = {
     PROFILE: 'profile',
     REGISTRATION: 'registration',
     TEST: 'test',
+    RECOVER_PASSWORD:'recover-password'
 
 }
 
@@ -28,6 +30,7 @@ function RoutesMain() {
                 <Route path={PATH.PROFILE} element={<Profile/>}/>
                 <Route path={PATH.REGISTRATION} element={<Registration/>}/>
                 <Route path={PATH.TEST} element={<Test/>}/>
+                <Route path={PATH.RECOVER_PASSWORD} element={<RecoverPassword/>}/>
                 <Route path='*' element={<Page404/>}/>
 
             </Routes>
