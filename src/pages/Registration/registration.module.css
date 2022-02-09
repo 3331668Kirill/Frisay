@@ -1,4 +1,5 @@
 .wrapper{
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,6 +14,7 @@
     color: #fff;
     margin-bottom: 10px;
 }
+
 .inputBlock p{
     margin: 0;
 }
@@ -24,5 +26,26 @@
 }
 .buttonBlock :not(:last-child){
     margin-right: 20px;
+}
+
+.error{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 25px;
+    font-size: 16px;
+    color: red;
+    margin: 0;
+}
+
+.loginText{
+    margin: 10px 0 0 0;
+    font-size: 14px;
+}
+.loginLink{
+    margin-left: 5px;
+    text-decoration: none;
+    color: yellow;
+    font-size: 16px;
 }
 

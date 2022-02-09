@@ -12,6 +12,10 @@ type RecoverPassPayloadType = {
     message:string
     from:string
 }
+type RegisterPayloadType = {
+    email:string
+    password: string
+}
 
 const instance = axios.create({
     baseURL: "http://localhost:7542/2.0/"
@@ -24,5 +28,9 @@ export const api = {
     recoverPass(payload:RecoverPassPayloadType){
         //return axios.post('https://neko-back.herokuapp.com/2.0/auth/forgot', {...payload})
         return instance.post('auth/forgot',{...payload})
+    },
+    register(payload:RegisterPayloadType){
+        return axios.post('https://neko-back.herokuapp.com/2.0/auth/register', {...payload})
+        // return instance.post('auth/register',{...payload})
     },
 }
