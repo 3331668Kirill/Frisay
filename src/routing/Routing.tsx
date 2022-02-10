@@ -7,6 +7,7 @@ import {Registration} from "../pages/Registration/Registration";
 import {Test} from "../components/Test/Test";
 import Login from "../pages/Login/Login";
 import {RecoverPassword} from "../pages/RecoverPass/RecoverPassword";
+import NewPassword from '../pages/NewPassword/NewPassword';
 
 
 export const PATH = {
@@ -14,8 +15,8 @@ export const PATH = {
     PROFILE: 'profile',
     REGISTRATION: 'registration',
     TEST: 'test',
-    RECOVER_PASSWORD:'recover-password'
-
+    RECOVER_PASSWORD:'recover-password',
+    SET_NEW_PASSWORD:'set-new-password/:token'
 }
 
 function RoutesMain() {
@@ -31,6 +32,7 @@ function RoutesMain() {
                 <Route path={PATH.REGISTRATION} element={<Registration/>}/>
                 <Route path={PATH.TEST} element={<Test/>}/>
                 <Route path={PATH.RECOVER_PASSWORD} element={<RecoverPassword/>}/>
+                <Route path={PATH.SET_NEW_PASSWORD} element={<NewPassword/>}/>
                 <Route path='*' element={<Page404/>}/>
 
             </Routes>

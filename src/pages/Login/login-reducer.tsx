@@ -15,7 +15,7 @@ export type UserInitialStateType = {
     error?: string
     token: string
 }
-export type ActionsType = ReturnType<typeof LoginAC>
+export type ActionsType = ReturnType<typeof LoginAC> | ReturnType<typeof LogoutAC>
 
 const initialState = {} as UserInitialStateType
 export const loginReducer = (state: UserInitialStateType = initialState, action: ActionsType): UserInitialStateType => {
@@ -23,6 +23,11 @@ export const loginReducer = (state: UserInitialStateType = initialState, action:
         case 'auth/LOGIN': {
             let stateCopy = {...state}
             stateCopy = action.data
+            return stateCopy
+        }
+        case 'auth/LOGOUT': {
+            let stateCopy = {...state}
+            stateCopy = {} as UserInitialStateType
             return stateCopy
         }
         default:
@@ -33,10 +38,21 @@ export const loginReducer = (state: UserInitialStateType = initialState, action:
 export const LoginAC = (data: UserInitialStateType) => {
     return ({type: 'auth/LOGIN', data} as const)
 }
+export const LogoutAC = () => {
+    return ({type: 'auth/LOGOUT'} as const)
+}
 
 export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
     api.login({email, password, rememberMe}).then((res) => {
         dispatch(LoginAC(res.data))
+    }).catch((err) => {
+        console.log(err)
+    })
+}
+
+export const logoutTC = () => (dispatch: Dispatch) => {
+    api.logout().then((res) => {
+       dispatch(LogoutAC())
     }).catch((err) => {
         console.log(err)
     })
