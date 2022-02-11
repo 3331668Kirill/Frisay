@@ -58,7 +58,7 @@ export const Registration = () => {
     const submitRegister = async () => {
         try {
             setLoading(true)
-           const res = await api.register(registerInfo)
+            await api.register(registerInfo)
             navigate(`/${PATH.PROFILE}`, {replace: true})
         } catch (error){
             const err = error as AxiosError
@@ -76,11 +76,11 @@ export const Registration = () => {
             <div className={s.wrapper}>
                 <div className={s.inputBlock}>
                     <p>Email</p>
-                    <SuperInputText value={registerInfo.email} onInput={(e) => emailInputHandler(e)}/>
+                    <SuperInputText value={registerInfo.email} onInput={emailInputHandler}/>
                 </div>
                 <div className={s.inputBlock}>
                     <p>Password</p>
-                    <SuperInputText type='password' value={registerInfo.password} onInput={(e) => passwordInputHandler(e)}/>
+                    <SuperInputText type='password' value={registerInfo.password} onInput={passwordInputHandler}/>
                 </div>
                 <div className={s.inputBlock}>
                     <p>Confirm password</p>
