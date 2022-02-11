@@ -1,5 +1,6 @@
 import {Dispatch} from "redux"
 import {api} from "../../api/api";
+import {AxiosError} from "axios";
 
 export type UserInitialStateType = {
     _id: string
@@ -15,7 +16,7 @@ export type UserInitialStateType = {
     error?: string
     token: string
 }
-export type ActionsType = ReturnType<typeof LoginAC> | ReturnType<typeof LogoutAC>
+export type ActionsType = ReturnType<typeof LoginAC> | ReturnType<typeof SetErrorAC> | ReturnType<typeof LogoutAC>
 
 const initialState = {} as UserInitialStateType
 export const loginReducer = (state: UserInitialStateType = initialState, action: ActionsType): UserInitialStateType => {
@@ -30,6 +31,9 @@ export const loginReducer = (state: UserInitialStateType = initialState, action:
             stateCopy = {} as UserInitialStateType
             return stateCopy
         }
+        case 'auth/SET-ERROR': {
+            return {...state, error: action.error}
+        }
         default:
             return state
     }
@@ -41,12 +45,17 @@ export const LoginAC = (data: UserInitialStateType) => {
 export const LogoutAC = () => {
     return ({type: 'auth/LOGOUT'} as const)
 }
+export const SetErrorAC = (error: string) => {
+    return ({type: 'auth/SET-ERROR', error} as const)
+}
 
 export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
     api.login({email, password, rememberMe}).then((res) => {
         dispatch(LoginAC(res.data))
-    }).catch((err) => {
-        console.log(err)
+    }).catch((err: AxiosError) => {
+        const error = err.response ? err.response.data.error :
+            (err.message + 'more details about error in the console')
+        dispatch(SetErrorAC(error))
     })
 }
 

@@ -15,6 +15,7 @@ const Login = () => {
     const [rememberMe, setRememberMe] = useState<boolean>(false)
     const dispatch = useDispatch();
     const userId = useSelector<AppRootStateType, string>(state => state.login._id)
+    const error = useSelector<AppRootStateType, string | undefined>(state => state.login.error)
 
     const login = () => {
         dispatch(loginTC(email, password, rememberMe))
@@ -39,6 +40,7 @@ const Login = () => {
             <SuperCheckbox onChangeChecked={handleRememberMe}>Remember Me</SuperCheckbox>
             <SuperButton onClick={login}>Log In</SuperButton>
             <Link to={'/registration'}><SuperButton>Register</SuperButton></Link>
+            {error && error}
         </div>
     );
 }
