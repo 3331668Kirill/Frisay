@@ -1,3 +1,4 @@
+import { newPasswordReducer } from './../pages/NewPassword/newPassword-reducer';
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {registrationReducer} from "./reducers/registration-reducer";
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
     tasks: registrationReducer,
     login: loginReducer,
     recoverPass: recoverPassReducer,
+    newPassword: newPasswordReducer,
 })
 // непосредственно создаём store
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
