@@ -72,3 +72,15 @@ export const deletePackTC = (id:string) => (dispatch: Dispatch): void => {
 
     })
 }
+
+export const updatePackTC = (id:string) => (dispatch: Dispatch): void => {
+    api.updatePack(id).then((res)=>{
+        console.log(res)
+        api.getPacks().then((res) => {
+            dispatch(setPacksAC(res.data.cardPacks))
+        })
+    }).catch((err) => {
+        console.log(err)
+
+    })
+}

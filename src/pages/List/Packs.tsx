@@ -9,10 +9,11 @@ type PacksPropsType = {
     updated: string
     path: string
     deletePack: (id: string) => void
+    updatePack: (id: string) => void
 }
 
 
-export const Packs = ({id, name, cardsCount, updated, path, deletePack}: PacksPropsType) => {
+export const Packs = ({id, name, cardsCount, updated, path, deletePack, updatePack}: PacksPropsType) => {
 
     return (
         <>
@@ -23,7 +24,7 @@ export const Packs = ({id, name, cardsCount, updated, path, deletePack}: PacksPr
                 <td>{path}</td>
                 <td>
                     <SuperButton onClick={() => deletePack(id)}> DEL</SuperButton>
-                    <SuperButton> UPDATE</SuperButton>
+                    <SuperButton onClick={() => updatePack(id)}> UPDATE</SuperButton>
                 </td>
             </tr>
         </>

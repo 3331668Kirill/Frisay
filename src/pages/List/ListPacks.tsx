@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
-import {PacksType, getCardsPackTC, addNewPackTC, deletePackTC} from "./cardsReducer";
+import {PacksType, getCardsPackTC, addNewPackTC, deletePackTC, updatePackTC} from "./cardsReducer";
 import {AppRootStateType} from "../../redux/store";
 import SuperButton from "../../components/SuperComponents/SuperButton/SuperButton";
 import SuperCheckbox from "../../components/SuperComponents/SuperCheckbox/SuperCheckbox";
@@ -26,6 +26,10 @@ export const ListPacks = () => {
     const deletePack = (id:string) => {
         dispatch(deletePackTC(id))
     }
+
+    const updatePack = (id:string) => {
+        dispatch(updatePackTC(id))
+    }
     console.log(userId)
     return (
         <div>
@@ -47,7 +51,7 @@ export const ListPacks = () => {
                         ? cardPacks.filter((t)=>t.user_id===userId).map((t) => {
                                 return (
                                     <Packs  id={t._id} name={t.name} deletePack={deletePack}
-                                            updated={t.updated} path={t.path}
+                                            updated={t.updated} path={t.path} updatePack={updatePack}
                                             cardsCount={t.cardsCount}/>
                                 )
                             }
@@ -55,7 +59,7 @@ export const ListPacks = () => {
                         : cardPacks?.length && cardPacks.map((t) => {
                             return (
                                 <Packs  id={t._id} name={t.name} deletePack={deletePack}
-                                        updated={t.updated} path={t.path}
+                                        updated={t.updated} path={t.path} updatePack={updatePack}
                                         cardsCount={t.cardsCount}/>
                             )
                         }
