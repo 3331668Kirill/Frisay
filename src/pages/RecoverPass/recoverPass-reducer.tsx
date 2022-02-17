@@ -4,7 +4,6 @@ import {api} from "../../api/api";
 export type RecoverPassInitialStateType = {
     info:string
     error?: string
-
 }
 export type ActionsType = ReturnType<typeof RecoverPassAC>
 
@@ -14,9 +13,7 @@ export const recoverPassReducer = (state: RecoverPassInitialStateType = initialS
         case 'auth/RECOVER_PASSWORD': {
             let stateCopy = {...state}
             stateCopy = action.data
-            console.log(stateCopy)
-
-            return stateCopy
+             return stateCopy
         }
         default:
             return state
@@ -31,7 +28,9 @@ export const recoverPassTC = (email: string) => (dispatch: Dispatch) => {
     api.recoverPass({email,
         from: "test-front-admin <3331668@mail.ru>",
         message: `<div style="background-color: lime; padding: 15px"> 
-            password recovery link: <a href='http://localhost:3000/#/set-new-password/$token$'>link</a></div>`
+            password recovery link: <a href='https://3331668Kirill.github.io/Frisay/#/set-new-password/$token$'>link</a></div>`
+        //https://3331668Kirill.github.io/Frisay
+        //http://localhost:3000/
 }).then((res) => {
         dispatch(RecoverPassAC(res.data))
     }).catch((err) => {
@@ -41,6 +40,6 @@ export const recoverPassTC = (email: string) => (dispatch: Dispatch) => {
         if(err.message === 'Request failed with status code 404'){
             dispatch(RecoverPassAC({info:'',error:'Email address not found /ᐠ-ꞈ-ᐟ\\\\'}))
         }
-        console.log(err.message === 'Request failed with status code 400')
+
     })
 }
