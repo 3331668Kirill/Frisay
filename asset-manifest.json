@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Frisay/static/css/main.b6b9f0a1.css",
-    "main.js": "/Frisay/static/js/main.b0703d1b.js",
+    "main.css": "/Frisay/static/css/main.79e666c6.css",
+    "main.js": "/Frisay/static/js/main.9b69cdc3.js",
     "static/js/787.28cb0dcd.chunk.js": "/Frisay/static/js/787.28cb0dcd.chunk.js",
     "static/media/404-page-not-found.jpg": "/Frisay/static/media/404-page-not-found.44f968b5b37b520269b3.jpg",
     "index.html": "/Frisay/index.html",
     "static/media/loader.svg": "/Frisay/static/media/loader.3ad46d70197e18868e853cac30565108.svg",
-    "main.b6b9f0a1.css.map": "/Frisay/static/css/main.b6b9f0a1.css.map",
-    "main.b0703d1b.js.map": "/Frisay/static/js/main.b0703d1b.js.map",
+    "main.79e666c6.css.map": "/Frisay/static/css/main.79e666c6.css.map",
+    "main.9b69cdc3.js.map": "/Frisay/static/js/main.9b69cdc3.js.map",
     "787.28cb0dcd.chunk.js.map": "/Frisay/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b6b9f0a1.css",
-    "static/js/main.b0703d1b.js"
+    "static/css/main.79e666c6.css",
+    "static/js/main.9b69cdc3.js"
   ]
 }
