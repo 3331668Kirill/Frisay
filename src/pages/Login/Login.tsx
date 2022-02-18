@@ -7,18 +7,21 @@ import SuperCheckbox from "../../components/SuperComponents/SuperCheckbox/SuperC
 import SuperButton from "../../components/SuperComponents/SuperButton/SuperButton";
 import s from "./Login.module.css"
 import {AppRootStateType} from "../../redux/store";
+import {PATH} from "../../routing/Routing";
+import {Loader} from "../../components/Loader/Loader";
 
 const Login = () => {
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [rememberMe, setRememberMe] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
     const userId = useSelector<AppRootStateType, string>(state => state.login._id)
     const error = useSelector<AppRootStateType, string | undefined>(state => state.login.error)
 
     const login = () => {
-        dispatch(loginTC(email, password, rememberMe))
+        dispatch(loginTC(email, password, rememberMe, setIsLoading))
     }
     const handleEmail = (email: string) => {
         setEmail(email.trim())
@@ -31,7 +34,7 @@ const Login = () => {
     }
 
     if (userId !== undefined) {
-        return <Navigate to='/profile'/>
+        return <Navigate to={`/${PATH.PROFILE}`}/>
     }
     return (
         <div className={s.loginPage}>
@@ -39,8 +42,11 @@ const Login = () => {
             <SuperInputText placeholder='password' type='password' onChangeText={handlePassword}/>
             <SuperCheckbox onChangeChecked={handleRememberMe}>Remember Me</SuperCheckbox>
             <SuperButton onClick={login}>Log In</SuperButton>
-            <Link to={'/registration'}><SuperButton>Register</SuperButton></Link>
-            {error && error}
+            <Link to={`/${PATH.REGISTRATION}`}>
+                <SuperButton>Register</SuperButton>
+            </Link>
+            {error && <p className={s.errorText}>{error}</p> }
+            {isLoading && <Loader />}
         </div>
     );
 }

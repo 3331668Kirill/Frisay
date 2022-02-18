@@ -1,5 +1,5 @@
 .loader{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     background-color: #ffffff3b;
@@ -9,6 +9,8 @@
 }
 
 .svg{
-    position: relative;
-    top: 25px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }

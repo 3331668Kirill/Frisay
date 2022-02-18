@@ -27,8 +27,8 @@ function RoutesMain() {
     return (
         <div className="main">
             <Routes>
-                <Route path='/' element={<PrivateRoutes/>}>
-                    <Route index element={<Home/>}/>
+                <Route element={<PrivateRoutes/>}>
+                    <Route path='/' element={<Home/>}/>
                     <Route path='/Frisay' element={<Home/>}/>
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
                     <Route path={PATH.LIST_PACKS} element={<ListPacks/>}/>

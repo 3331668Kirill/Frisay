@@ -6,13 +6,6 @@ import {useDispatch} from "react-redux";
 import {checkMeTC} from "./pages/Login/login-reducer";
 import {Loader} from "./components/Loader/Loader";
 
-const loaderStyles = {
-    left: '50%',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
-}
-
-
 function App() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const dispatch = useDispatch()
@@ -21,7 +14,7 @@ function App() {
         dispatch(checkMeTC({}, setIsLoading))
     }, [])
 
-    if (isLoading) return <Loader svgStyles={loaderStyles} wrapperStyles={{backgroundColor: '#282c34'}}/>
+    if (isLoading) return <Loader wrapperStyles={{backgroundColor: '#282c34'}}/>
     return (
         <div className="App">
             <HashRouter>

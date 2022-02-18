@@ -1,4 +1,18 @@
 .loginPage {
+    position: relative;
     display: flex;
     flex-direction: column;
+}
+.loginPage >:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.errorText{
+    width: max-content;
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: red;
 }

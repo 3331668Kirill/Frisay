@@ -18,7 +18,7 @@ export const Registration = () => {
     });
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState<boolean>(false);
+    const [isLoading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate()
 
 
@@ -96,7 +96,7 @@ export const Registration = () => {
                     <Link className={s.loginLink} to={`/${PATH.LOGIN}`}>Sing In</Link>
                 </p>
             </div>
-            {loading && <Loader /> }
+            {isLoading && <Loader /> }
         </>
 
     )

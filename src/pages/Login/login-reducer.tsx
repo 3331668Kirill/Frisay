@@ -9,8 +9,8 @@ export type UserInitialStateType = {
     name: string
     avatar?: string
     publicCardPacksCount: number
-    created: Date
-    update: Date
+    created: string
+    update: string
     isAdmin: boolean
     verified: boolean
     rememberMe: boolean
@@ -59,14 +59,15 @@ export const SetErrorAC = (error: string) => {
     return ({type: 'auth/SET-ERROR', error} as const)
 }
 
-export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+export const loginTC = (email: string, password: string, rememberMe: boolean, setIsLoading: ReactDispatch<SetStateAction<boolean>>) => (dispatch: Dispatch) => {
+    setIsLoading(true)
     api.login({email, password, rememberMe}).then((res) => {
         dispatch(LoginAC(res.data))
     }).catch((err: AxiosError) => {
         const error = err.response ? err.response.data.error :
             (err.message + 'more details about error in the console')
         dispatch(SetErrorAC(error))
-    })
+    }).finally(() => setIsLoading(false))
 }
 
 export const logoutTC = () => (dispatch: Dispatch) => {

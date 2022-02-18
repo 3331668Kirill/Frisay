@@ -6,6 +6,8 @@ import {recoverPassTC} from "./recoverPass-reducer";
 import {AppRootStateType} from "../../redux/store";
 import {Navigate} from "react-router-dom";
 
+import s from './RecoverPassword.module.css'
+
 
 
 
@@ -27,7 +29,7 @@ export const RecoverPassword = () => {
     return (
         <div>
             <SuperInputText placeholder='email' onChangeText={handleEmail}/>
-            <p> Input your e-mail and we will send you further instractions</p>
+            <p className={s.text}> Input your e-mail and we will send you further instractions</p>
             <SuperButton onClick={recoverPass}>Send instructions</SuperButton>
             {error && <div style={{color:'red'}}>{error}</div>}
             {info && <Navigate to={'/'}/>}

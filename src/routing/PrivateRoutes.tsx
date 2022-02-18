@@ -16,7 +16,12 @@ export const PrivateRoutes = () => {
                 <ul>
                     <li>
                         <NavLink to={'/'}>
-                            Cards
+                            Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={PATH.LIST_PACKS}>
+                            Packs list
                         </NavLink>
                     </li>
                     <li>
