@@ -61,7 +61,7 @@ export const addNewPackTC = (page: number, pageCount: number) => (dispatch: Disp
     api.addNewPack().then((res) => {
 
         api.getPacks(page, pageCount).then((res) => {
-            dispatch(setPacksAC(res.data.cardPacks))
+            dispatch(setPacksAC(res.data))
         })
     }).catch((err) => {
         console.log(err)
@@ -73,7 +73,7 @@ export const deletePackTC = (id: string, page: number, pageCount: number) => (di
     api.deletePack(id).then((res) => {
 
         api.getPacks(page, pageCount).then((res) => {
-            dispatch(setPacksAC(res.data.cardPacks))
+            dispatch(setPacksAC(res.data))
         })
     }).catch((err) => {
         console.log(err)
@@ -85,7 +85,7 @@ export const updatePackTC = (id: string, page: number, pageCount: number) => (di
     api.updatePack(id).then((res) => {
 
         api.getPacks(page, pageCount).then((res) => {
-            dispatch(setPacksAC(res.data.cardPacks))
+            dispatch(setPacksAC(res.data))
         })
     }).catch((err) => {
         console.log(err)
