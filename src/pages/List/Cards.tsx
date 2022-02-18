@@ -12,10 +12,11 @@ type CardsPropsType = {
     updated: string
     user_id: string
     id: string
+    cardsPack_id:string
 }
 
 
-export const Cards = ({ id, answer, updated, grade, question, rating, user_id, created}: CardsPropsType) => {
+export const Cards = ({ id, answer, updated, grade, question, rating, user_id, created, cardsPack_id}: CardsPropsType) => {
 
     return (
         <>
@@ -24,6 +25,8 @@ export const Cards = ({ id, answer, updated, grade, question, rating, user_id, c
                 <td>{answer}</td>
                 <td>{updated}</td>
                 <td>{rating}</td>
+                <td>{cardsPack_id}</td>
+
                 <td>
                     <SuperButton onClick={() =>{}}> DEL</SuperButton>
                     <SuperButton onClick={() => {}}> UPDATE</SuperButton>

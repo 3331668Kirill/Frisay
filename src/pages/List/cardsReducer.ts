@@ -1,8 +1,10 @@
 import {Dispatch} from "redux"
 import {api} from "../../api/api";
+import {setPacksAC} from "./cardsPackReducer";
 
 export type CardsDataType = {
     cards: CardsType[]
+    id:string
     cardsTotalCount: number
     maxGrade: number
     minGrade: number
@@ -38,7 +40,7 @@ export const cardsReducer = (state: CardsDataType = initialState, action: Action
     switch (action.type) {
         case 'SET_CARDS': {
             let stateCopy = {...state}
-            stateCopy = action.data
+            stateCopy = {...action.data,id:action.id}
             console.log(stateCopy)
             return stateCopy
         }
@@ -47,13 +49,25 @@ export const cardsReducer = (state: CardsDataType = initialState, action: Action
     }
 }
 
-export const setCardsAC = (data: CardsDataType) => {
-    return ({type: 'SET_CARDS', data} as const)
+export const setCardsAC = (data: CardsDataType, id:string) => {
+    return ({type: 'SET_CARDS', data, id} as const)
 }
 export const getCardsTC = (page: number, pageCount: number, id: string) => (dispatch: Dispatch): void => {
     api.getCards(page, pageCount, id).then((res) => {
         console.log(res)
-        dispatch(setCardsAC(res.data))
+        dispatch(setCardsAC(res.data, id))
+    }).catch((err) => {
+        console.log(err)
+
+    })
+}
+
+export const addNewCardTC = (page: number, pageCount: number, id: string) => (dispatch: Dispatch): void => {
+    api.addNewCard(id).then((res) => {
+
+        api.getCards(page, pageCount, id).then((res) => {
+            dispatch(setCardsAC(res.data, id))
+        })
     }).catch((err) => {
         console.log(err)
 

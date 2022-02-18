@@ -55,4 +55,7 @@ export const api = {
     getCards(page: number, pageCount: number, id:string) {
         return instance.get(`/cards/card/?page=${page}&pageCount=${pageCount}&cardsPack_id=${id}`)
     },
+    addNewCard(id:string) {
+        return instance.post('/cards/card', {card: {cardsPack_id:id,question: "WHO ARE YOU?", grade: 4}})
+    },
 }
