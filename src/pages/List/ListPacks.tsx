@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
-import {PacksType, getCardsPackTC, addNewPackTC, deletePackTC, updatePackTC} from "./cardsReducer";
+import {PacksType, getCardsPackTC, addNewPackTC, deletePackTC, updatePackTC} from "./cardsPackReducer";
 import {AppRootStateType} from "../../redux/store";
 import SuperButton from "../../components/SuperComponents/SuperButton/SuperButton";
 import SuperCheckbox from "../../components/SuperComponents/SuperCheckbox/SuperCheckbox";
 import {Packs} from "./Packs";
 import Pagination from "../../components/Pagination/Pagination";
+import {getCardsTC} from "./cardsReducer";
 
 export const ListPacks = () => {
     const dispatch = useDispatch()
-    const cardPacks = useSelector<AppRootStateType, PacksType>(state => state.cards)
+    const cardPacks = useSelector<AppRootStateType, PacksType>(state => state.packs)
     const userId = useSelector<AppRootStateType, string>(state => state.login._id)
     const [isChecked, setIsChecked] = useState<boolean>(false)
     const [currentPage, setCurrentPage] = useState(1)
@@ -33,6 +34,9 @@ export const ListPacks = () => {
     const updatePack = (id: string) => {
         dispatch(updatePackTC(id, currentPage, pageCount))
     }
+    const showCards = (id: string) =>{
+        dispatch(getCardsTC(1,7,id))
+    }
     console.log(userId)
     return (
         <div>
@@ -53,17 +57,17 @@ export const ListPacks = () => {
                     {cardPacks && isChecked
                         ? cardPacks.cardPacks.filter((t) => t.user_id === userId).map((t) => {
                                 return (
-                                    <Packs id={t._id} name={t.name} deletePack={deletePack}
+                                    <Packs key={t._id} id={t._id} name={t.name} deletePack={deletePack}
                                            updated={t.updated} path={t.path} updatePack={updatePack}
-                                           cardsCount={t.cardsCount}/>
+                                           cardsCount={t.cardsCount} showCards={showCards}/>
                                 )
                             }
                         )
                         : cardPacks.cardPacks && cardPacks.cardPacks.map((t) => {
                             return (
-                                <Packs id={t._id} name={t.name} deletePack={deletePack}
+                                <Packs key={t._id} id={t._id} name={t.name} deletePack={deletePack}
                                        updated={t.updated} path={t.path} updatePack={updatePack}
-                                       cardsCount={t.cardsCount}/>
+                                       cardsCount={t.cardsCount} showCards={showCards}/>
                             )
                         }
                     )

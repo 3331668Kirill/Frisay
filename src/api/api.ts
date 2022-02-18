@@ -55,4 +55,19 @@ export const api = {
     updatePack(id: string) {
         return instance.put(`/cards/pack`, {cardsPack: {_id: id, name: 'XOXOXO'}})
     },
+
+    getCards(page: number, pageCount: number, id:string) {
+        return instance.get(`/cards/card/?page=${page}&pageCount=${pageCount}&cardsPack_id=${id}`)
+    },
+    addNewCard(id:string) {
+        return instance.post('/cards/card', {card: {cardsPack_id:id,question: "WHO ARE YOU?", grade: 4}})
+    },
+    deleteCard(id: string) {
+        return instance.delete(`/cards/card?id=${id}`)
+    },
+    updateCard(id: string) {
+        return instance.put(`/cards/card`, {card: {_id: id, question: 'WHAT`s GOING ON?'}})
+    },
 }
+
+
