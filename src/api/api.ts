@@ -52,4 +52,7 @@ export const api = {
     updatePack(id: string) {
         return instance.put(`/cards/pack`, {cardsPack: {_id: id, name: 'XOXOXO'}})
     },
+    getCards(page: number, pageCount: number, id:string) {
+        return instance.get(`/cards/card/?page=${page}&pageCount=${pageCount}&cardsPack_id=${id}`)
+    },
 }

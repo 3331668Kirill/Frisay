@@ -1,38 +1,42 @@
 import {Dispatch} from "redux"
 import {api} from "../../api/api";
 
-
-export type PacksType = {
-    cardPacks: CardsPackType[]
-    cardPacksTotalCount: number
-    maxCardsCount: number
-    minCardsCount: number
+export type CardsDataType = {
+    cards: CardsType[]
+    cardsTotalCount: number
+    maxGrade: number
+    minGrade: number
+    packUserId: string
     page: number
     pageCount: number
+    token: string
+    tokenDeathTime: number
 }
-export type CardsPackType = {
-    cardsCount: number
-    created?: string
-    grade?: number
-    more_id?: string
-    name?: string
-    path: string
-    private?: boolean
-    rating?: number
-    shots?: number
-    type?: string
+
+export type CardsType = {
+    answer: string
+    cardsPack_id: string
+    comments: string
+    created: string
+    grade: number
+    more_id: string
+    question: string
+    rating: number
+    shots: number
+    type: string
     updated: string
     user_id: string
-    user_name: string
-    __v?: number
+    __v: number
     _id: string
 }
-export type ActionsType = ReturnType<typeof setPacksAC>
 
-const initialState = {} as PacksType
-export const cardsReducer = (state: PacksType = initialState, action: ActionsType): PacksType => {
+
+export type ActionsType = ReturnType<typeof setCardsAC>
+
+const initialState = {} as CardsDataType
+export const cardsReducer = (state: CardsDataType = initialState, action: ActionsType): CardsDataType => {
     switch (action.type) {
-        case 'SET_PACKS': {
+        case 'SET_CARDS': {
             let stateCopy = {...state}
             stateCopy = action.data
             console.log(stateCopy)
@@ -43,49 +47,13 @@ export const cardsReducer = (state: PacksType = initialState, action: ActionsTyp
     }
 }
 
-export const setPacksAC = (data: PacksType) => {
-    return ({type: 'SET_PACKS', data} as const)
+export const setCardsAC = (data: CardsDataType) => {
+    return ({type: 'SET_CARDS', data} as const)
 }
-
-export const getCardsPackTC = (page: number, pageCount: number) => (dispatch: Dispatch): void => {
-    api.getPacks(page, pageCount).then((res) => {
-        dispatch(setPacksAC(res.data))
-    }).catch((err) => {
-        console.log(err)
-
-    })
-}
-
-export const addNewPackTC = (page: number, pageCount: number) => (dispatch: Dispatch): void => {
-    api.addNewPack().then((res) => {
+export const getCardsTC = (page: number, pageCount: number, id: string) => (dispatch: Dispatch): void => {
+    api.getCards(page, pageCount, id).then((res) => {
         console.log(res)
-        api.getPacks(page, pageCount).then((res) => {
-            dispatch(setPacksAC(res.data.cardPacks))
-        })
-    }).catch((err) => {
-        console.log(err)
-
-    })
-}
-
-export const deletePackTC = (id: string, page: number, pageCount: number) => (dispatch: Dispatch): void => {
-    api.deletePack(id).then((res) => {
-        console.log(res)
-        api.getPacks(page, pageCount).then((res) => {
-            dispatch(setPacksAC(res.data.cardPacks))
-        })
-    }).catch((err) => {
-        console.log(err)
-
-    })
-}
-
-export const updatePackTC = (id: string, page: number, pageCount: number) => (dispatch: Dispatch): void => {
-    api.updatePack(id).then((res) => {
-        console.log(res)
-        api.getPacks(page, pageCount).then((res) => {
-            dispatch(setPacksAC(res.data.cardPacks))
-        })
+        dispatch(setCardsAC(res.data))
     }).catch((err) => {
         console.log(err)
 

@@ -4,6 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import {registrationReducer} from "./reducers/registration-reducer";
 import {loginReducer} from "../pages/Login/login-reducer";
 import {recoverPassReducer} from "../pages/RecoverPass/recoverPass-reducer";
+import {cardsPackReducer} from "../pages/List/cardsPackReducer";
 import {cardsReducer} from "../pages/List/cardsReducer";
 
 // объединяя reducer-ы с помощью combineReducers,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     login: loginReducer,
     recoverPass: recoverPassReducer,
     newPassword: newPasswordReducer,
+    packs: cardsPackReducer,
     cards: cardsReducer,
 })
 // непосредственно создаём store
