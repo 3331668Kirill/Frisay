@@ -2,7 +2,7 @@ import React from "react";
 
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/store";
-import {addNewCardTC, CardsType, deleteCardTC} from "./cardsReducer";
+import {addNewCardTC, CardsType, deleteCardTC, updateCardTC} from "./cardsReducer";
 import {Cards} from "./Cards";
 import SuperButton from "../../components/SuperComponents/SuperButton/SuperButton";
 import {CardsPackType} from "./cardsPackReducer";
@@ -23,6 +23,11 @@ export const ListCard = () => {
     const deleteCard = (idCard: string) => {
         dispatch(deleteCardTC(1,7, idCard, idPack))
     }
+
+    const updateCard = (idCard: string) => {
+        dispatch(updateCardTC(idCard,idPack, 1,7))
+    }
+
     return (
         <div>
 
@@ -38,9 +43,9 @@ export const ListCard = () => {
             {cards && cards.map(t=>{
                 return <Cards key={t._id} id={t._id} updated={t.updated}
                               answer={t.answer} deleteCard={deleteCard}
-                              created={t.created} grade={t.grade}
+                              created={t.created}  updateCard={updateCard}
                               question={t.question} cardsPack_id={t.cardsPack_id}
-                              rating={t.rating} user_id={t.user_id}
+                              rating={t.rating} 
                 />
             })}
                 </tbody>

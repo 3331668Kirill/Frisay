@@ -5,21 +5,20 @@ import SuperButton from "../../components/SuperComponents/SuperButton/SuperButto
 
 type CardsPropsType = {
     answer: string
-    created: string
-    grade: number
+    created?: string
     question: string
     rating: number
     updated: string
-    user_id: string
     id: string
-    cardsPack_id:string
+    cardsPack_id?:string
     deleteCard:(idCard: string)=>void
+    updateCard:(idCard: string)=>void
 }
 
 
 export const Cards = ({ id, answer, updated, deleteCard,
-                          grade, question, rating,
-                          user_id, created, cardsPack_id}: CardsPropsType) => {
+                          question, rating, updateCard,
+                          }: CardsPropsType) => {
 
     return (
         <>
@@ -28,11 +27,12 @@ export const Cards = ({ id, answer, updated, deleteCard,
                 <td>{answer}</td>
                 <td>{updated}</td>
                 <td>{rating}</td>
-                <td>{cardsPack_id}</td>
+                {/*<td>{cardsPack_id}</td>*/}
+                <td>{id}</td>
 
                 <td>
                     <SuperButton onClick={() =>deleteCard(id)}> DEL</SuperButton>
-                    <SuperButton onClick={() => {}}> UPDATE</SuperButton>
+                    <SuperButton onClick={() => updateCard(id)}> UPDATE</SuperButton>
 
                 </td>
             </tr>
