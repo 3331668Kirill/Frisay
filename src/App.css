@@ -1,18 +1,59 @@
 .App {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  min-height: 100vh;
 }
 
-
-
-.App-header {
+.main {
+  flex-grow: 1;
   background-color: #282c34;
-  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.main-body{
+  flex-grow: 1;
+  padding-top: 60px;
+  width: 100%;
+  height: 100%;
+}
+
+.main-header {
+  background-color: #EBE0E9;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.main-header ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+.main-header ul li a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  min-width: 173px;
+  font-size: 20px;
+  line-height: 16px;
+  color: #2D2E46;
+}
+
+.main-header ul li a:hover {
+  background-color: #f1e6ef;
+}
+.main-header ul li a.active {
+  background-color: #DCCCDB;
 }
 
 .App-link {

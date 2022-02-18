@@ -35,6 +35,9 @@ export const api = {
         return instance.post('auth/register', { ...payload })
         // return instance.post('auth/register',{...payload})
     },
+    checkMe(payload: {}) {
+        return instance.post('auth/me', payload)
+    },
     logout() {
         return instance.delete('auth/me')
     },

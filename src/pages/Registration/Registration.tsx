@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {FormEvent, useState} from "react";
 import SuperInputText from "../../components/SuperComponents/SuperInputText/SuperInputText";
 import s from './registration.module.css'
 import SuperButton from "../../components/SuperComponents/SuperButton/SuperButton";
@@ -22,15 +22,15 @@ export const Registration = () => {
     const navigate = useNavigate()
 
 
-    const emailInputHandler = (e: any) => {
+    const emailInputHandler = (e: FormEvent<HTMLInputElement>) => {
         setError('')
         setRegisterInfo({...registerInfo, email: e.currentTarget.value})
     }
-    const passwordInputHandler = (e: any) => {
+    const passwordInputHandler = (e: FormEvent<HTMLInputElement>) => {
         setError('')
         setRegisterInfo({...registerInfo, password: e.currentTarget.value})
     }
-    const confirmPasswordHandler = (e: any) => {
+    const confirmPasswordHandler = (e: FormEvent<HTMLInputElement>) => {
         setError('')
         setConfirmPassword(e.currentTarget.value)
     }
@@ -88,7 +88,7 @@ export const Registration = () => {
                 </div>
                 {<p className={s.error}>{error || ''}</p>}
                 <div className={s.buttonBlock}>
-                    <SuperButton>Cancel</SuperButton>
+                    <SuperButton onClick={() => navigate(-1)}>Cancel</SuperButton>
                     <SuperButton onClick={validate}>Register</SuperButton>
                 </div>
                 <p className={s.loginText}>

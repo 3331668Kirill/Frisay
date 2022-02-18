@@ -1,25 +1,41 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import RoutesMain from "./routing/Routing";
-import { HashRouter, NavLink} from "react-router-dom";
+import {HashRouter, NavLink} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {checkMeTC} from "./pages/Login/login-reducer";
+import {Loader} from "./components/Loader/Loader";
+
+const loaderStyles = {
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+}
+
 
 function App() {
-    return (
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(checkMeTC({}, setIsLoading))
+    }, [])
+
+    if (isLoading) return <Loader svgStyles={loaderStyles} wrapperStyles={{backgroundColor: '#282c34'}}/>
+    return (
         <div className="App">
             <HashRouter>
-                <header className="App-header">
-
-                    <RoutesMain/>
+                <header>
+                    <div>
+                        <NavLink to={'/'}> Home </NavLink>
+                        <NavLink to={'/login'}> Login </NavLink>
+                        <NavLink to={'/profile'}> Profile </NavLink>
+                        <NavLink to={'/Registration'}> Registration </NavLink>
+                        <NavLink to={'/recover-password'}> Forgot password </NavLink>
+                        <NavLink to={'/Test'}> Test </NavLink>
+                    </div>
                 </header>
-                <div>
-                    <NavLink to={'/'}> Home </NavLink>
-                    <NavLink to={'/login'}> Login </NavLink>
-                    <NavLink to={'/profile'}> Profile </NavLink>
-                    <NavLink to={'/Registration'}> Registration </NavLink>
-                    <NavLink to={'/recover-password'}> Forgot password </NavLink>
-                    <NavLink to={'/Test'}> Test </NavLink>
-                </div>
+                <RoutesMain/>
             </HashRouter>
         </div>
     );

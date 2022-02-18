@@ -1,6 +1,7 @@
 import {Dispatch} from "redux"
 import {api} from "../../api/api";
-import {AxiosError} from "axios";
+import {AxiosError, AxiosResponse} from "axios";
+import {SetStateAction , Dispatch as ReactDispatch} from "react";
 
 export type UserInitialStateType = {
     _id: string
@@ -16,7 +17,10 @@ export type UserInitialStateType = {
     error?: string
     token: string
 }
-export type ActionsType = ReturnType<typeof LoginAC> | ReturnType<typeof SetErrorAC> | ReturnType<typeof LogoutAC>
+export type ActionsType = ReturnType<typeof LoginAC>
+    | ReturnType<typeof SetErrorAC>
+    | ReturnType<typeof LogoutAC>
+    | ReturnType<typeof CheckMeAC>
 
 const initialState = {} as UserInitialStateType
 export const loginReducer = (state: UserInitialStateType = initialState, action: ActionsType): UserInitialStateType => {
@@ -34,11 +38,17 @@ export const loginReducer = (state: UserInitialStateType = initialState, action:
         case 'auth/SET-ERROR': {
             return {...state, error: action.error}
         }
+        case "auth/CHECK_ME": {
+            return {...action.payload}
+        }
         default:
             return state
     }
 }
 
+export const CheckMeAC = (payload: UserInitialStateType) => {
+    return ({type: 'auth/CHECK_ME', payload} as const)
+}
 export const LoginAC = (data: UserInitialStateType) => {
     return ({type: 'auth/LOGIN', data} as const)
 }
@@ -60,9 +70,20 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
 }
 
 export const logoutTC = () => (dispatch: Dispatch) => {
-    api.logout().then((res) => {
+    api.logout().then(() => {
        dispatch(LogoutAC())
     }).catch((err) => {
         console.log(err)
+    })
+}
+export const checkMeTC = (payload: {}, setIsLoading: ReactDispatch<SetStateAction<boolean>>) => (dispatch: Dispatch) => {
+    setIsLoading(true)
+    api.checkMe(payload).then((res: AxiosResponse<UserInitialStateType>) => {
+        console.log(res.data)
+        dispatch(CheckMeAC(res.data))
+    }).catch((err) => {
+        console.log(err)
+    }).finally(() => {
+        setIsLoading(false)
     })
 }
