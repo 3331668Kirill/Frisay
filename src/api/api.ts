@@ -34,6 +34,9 @@ export const api = {
         return instance.post('auth/register', {...payload})
 
     },
+    checkMe(payload: {}) {
+        return instance.post('auth/me', payload)
+    },
     logout() {
         return instance.delete('auth/me')
     },
@@ -52,6 +55,7 @@ export const api = {
     updatePack(id: string) {
         return instance.put(`/cards/pack`, {cardsPack: {_id: id, name: 'XOXOXO'}})
     },
+
     getCards(page: number, pageCount: number, id:string) {
         return instance.get(`/cards/card/?page=${page}&pageCount=${pageCount}&cardsPack_id=${id}`)
     },
@@ -65,3 +69,5 @@ export const api = {
         return instance.put(`/cards/card`, {card: {_id: id, question: 'WHAT`s GOING ON?'}})
     },
 }
+
+

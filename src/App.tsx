@@ -1,14 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import RoutesMain from "./routing/Routing";
-import { HashRouter, NavLink} from "react-router-dom";
+import {HashRouter, NavLink} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {checkMeTC} from "./pages/Login/login-reducer";
+import {Loader} from "./components/Loader/Loader";
 
 function App() {
-    return (
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(checkMeTC({}, setIsLoading))
+    }, [])
+
+    if (isLoading) return <Loader wrapperStyles={{backgroundColor: '#282c34'}}/>
+    return (
         <div className="App">
             <HashRouter>
-                <header className="App-header">
+                <header>
                     <div>
                         <NavLink to={'/'}> Home </NavLink>
                         <NavLink to={'/login'}> Login </NavLink>
@@ -19,9 +29,8 @@ function App() {
                         <NavLink to={'/list-packs'}> Packs </NavLink>
 
                     </div>
-                    <RoutesMain/>
                 </header>
-
+                <RoutesMain/>
             </HashRouter>
         </div>
     );
