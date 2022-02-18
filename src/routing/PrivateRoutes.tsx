@@ -6,7 +6,7 @@ import {PATH} from './Routing';
 
 export const PrivateRoutes = () => {
     const user = useTypedSelector(state => state.login)
-    const isAuth = Object.keys(user).length !== 0
+    const isAuth = !!user.email
 
     if (!isAuth) return <Navigate to={PATH.LOGIN}/>
 
