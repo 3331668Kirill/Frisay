@@ -5,6 +5,7 @@ import {Page404} from "../pages/404/404";
 import {Home} from "../pages/Home/Home";
 import Login from '../pages/Login/Login';
 import NewPassword from '../pages/NewPassword/NewPassword';
+import {ListPacks} from "../pages/List/ListPacks";
 import {Profile} from "../pages/Profile/Profile";
 import {RecoverPassword} from '../pages/RecoverPass/RecoverPassword';
 import {Registration} from '../pages/Registration/Registration';
@@ -18,7 +19,8 @@ export const PATH = {
     REGISTRATION: 'registration',
     TEST: 'test',
     RECOVER_PASSWORD: 'recover-password',
-    SET_NEW_PASSWORD: 'set-new-password/:token'
+    SET_NEW_PASSWORD: 'set-new-password/:token',
+    LIST_PACKS: 'list-packs'
 }
 
 function RoutesMain() {
@@ -29,6 +31,7 @@ function RoutesMain() {
                     <Route index element={<Home/>}/>
                     <Route path='/Frisay' element={<Home/>}/>
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
+                    <Route path={PATH.LIST_PACKS} element={<ListPacks/>}/>
                 </Route>
                 <Route element={<PublicRoutes/>}>
                     <Route path={PATH.LOGIN} element={<Login/>}/>

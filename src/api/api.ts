@@ -25,15 +25,14 @@ const instance = axios.create({
 
 export const api = {
     login(payload: LoginPayloadType) {
-        return instance.post(`auth/login`, { ...payload })
+        return instance.post(`auth/login`, {...payload})
     },
     recoverPass(payload: RecoverPassPayloadType) {
-        //return axios.post('https://neko-back.herokuapp.com/2.0/auth/forgot', {...payload})
-        return instance.post('auth/forgot', { ...payload })
+        return instance.post('auth/forgot', {...payload})
     },
     register(payload: RegisterPayloadType) {
-        return instance.post('auth/register', { ...payload })
-        // return instance.post('auth/register',{...payload})
+        return instance.post('auth/register', {...payload})
+
     },
     checkMe(payload: {}) {
         return instance.post('auth/me', payload)
@@ -43,5 +42,17 @@ export const api = {
     },
     setNewPassword(data: { password: string, resetPasswordToken: string }) {
         return instance.post('auth/set-new-password', data)
+    },
+    getPacks(page: number, pageCount: number) {
+        return instance.get(`cards/pack/?page=${page}&pageCount=${pageCount}`)
+    },
+    addNewPack() {
+        return instance.post('/cards/pack/', {cardsPack: {name: 'XAXAXA'}})
+    },
+    deletePack(id: string) {
+        return instance.delete(`/cards/pack?id=${id}`)
+    },
+    updatePack(id: string) {
+        return instance.put(`/cards/pack`, {cardsPack: {_id: id, name: 'XOXOXO'}})
     },
 }
