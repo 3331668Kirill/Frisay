@@ -2,22 +2,26 @@ import React from "react";
 
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/store";
-import {addNewCardTC, CardsType} from "./cardsReducer";
+import {addNewCardTC, CardsType, deleteCardTC} from "./cardsReducer";
 import {Cards} from "./Cards";
 import SuperButton from "../../components/SuperComponents/SuperButton/SuperButton";
-import {CardsPackType, PacksType} from "./cardsPackReducer";
+import {CardsPackType} from "./cardsPackReducer";
 
 export const ListCard = () => {
     const dispatch = useDispatch()
     const cards = useSelector<AppRootStateType, CardsType[]>(state => state.cards.cards)
-    const id = useSelector<AppRootStateType, string>(state => state.cards.id)
+    const idPack = useSelector<AppRootStateType, string>(state => state.cards.id)
     const packs = useSelector<AppRootStateType, CardsPackType[]>(state => state.packs.cardPacks)
 
     console.log("packs=",packs)
     console.log("cards=",cards)
-    console.log(id)
+    console.log(idPack)
     const addCard = () => {
-        dispatch(addNewCardTC(1, 7, id))
+        dispatch(addNewCardTC(1, 7, idPack))
+    }
+
+    const deleteCard = (idCard: string) => {
+        dispatch(deleteCardTC(1,7, idCard, idPack))
     }
     return (
         <div>
@@ -33,7 +37,7 @@ export const ListCard = () => {
                 </tr>
             {cards && cards.map(t=>{
                 return <Cards key={t._id} id={t._id} updated={t.updated}
-                              answer={t.answer}
+                              answer={t.answer} deleteCard={deleteCard}
                               created={t.created} grade={t.grade}
                               question={t.question} cardsPack_id={t.cardsPack_id}
                               rating={t.rating} user_id={t.user_id}

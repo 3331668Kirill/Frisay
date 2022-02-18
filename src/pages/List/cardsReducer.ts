@@ -70,6 +70,17 @@ export const addNewCardTC = (page: number, pageCount: number, id: string) => (di
         })
     }).catch((err) => {
         console.log(err)
+    })
+}
+
+export const deleteCardTC = (page: number, pageCount: number,idCard: string, idPack:string) => (dispatch: Dispatch): void => {
+    api.deleteCard(idCard).then((res) => {
+
+        api.getCards(page, pageCount, idPack).then((res) => {
+            dispatch(setCardsAC(res.data, idPack))
+        })
+    }).catch((err) => {
+        console.log(err)
 
     })
 }

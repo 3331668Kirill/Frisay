@@ -13,10 +13,13 @@ type CardsPropsType = {
     user_id: string
     id: string
     cardsPack_id:string
+    deleteCard:(idCard: string)=>void
 }
 
 
-export const Cards = ({ id, answer, updated, grade, question, rating, user_id, created, cardsPack_id}: CardsPropsType) => {
+export const Cards = ({ id, answer, updated, deleteCard,
+                          grade, question, rating,
+                          user_id, created, cardsPack_id}: CardsPropsType) => {
 
     return (
         <>
@@ -28,7 +31,7 @@ export const Cards = ({ id, answer, updated, grade, question, rating, user_id, c
                 <td>{cardsPack_id}</td>
 
                 <td>
-                    <SuperButton onClick={() =>{}}> DEL</SuperButton>
+                    <SuperButton onClick={() =>deleteCard(id)}> DEL</SuperButton>
                     <SuperButton onClick={() => {}}> UPDATE</SuperButton>
 
                 </td>

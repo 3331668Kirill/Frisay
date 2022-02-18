@@ -58,4 +58,7 @@ export const api = {
     addNewCard(id:string) {
         return instance.post('/cards/card', {card: {cardsPack_id:id,question: "WHO ARE YOU?", grade: 4}})
     },
+    deleteCard(id: string) {
+        return instance.delete(`/cards/card?id=${id}`)
+    },
 }
