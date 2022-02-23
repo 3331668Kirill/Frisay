@@ -1,47 +1,61 @@
-import React, {useEffect, useState} from "react"
+import React, {ChangeEvent, useEffect, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
-import {PacksType, getCardsPackTC, addNewPackTC, deletePackTC, updatePackTC} from "./cardsPackReducer";
+import {
+    PacksType,
+    getCardsPackTC,
+    addNewPackTC,
+    deletePackTC,
+    updatePackTC,
+    setSearchValueAC
+} from "./cardsPackReducer";
 import {AppRootStateType} from "../../redux/store";
 import SuperButton from "../../components/SuperComponents/SuperButton/SuperButton";
 import SuperCheckbox from "../../components/SuperComponents/SuperCheckbox/SuperCheckbox";
 import {Packs} from "./Packs";
 import Pagination from "../../components/Pagination/Pagination";
 import {getCardsTC} from "./cardsReducer";
+import SuperInputText from "../../components/SuperComponents/SuperInputText/SuperInputText";
 
 export const ListPacks = () => {
     const dispatch = useDispatch()
     const cardPacks = useSelector<AppRootStateType, PacksType>(state => state.packs)
     const userId = useSelector<AppRootStateType, string>(state => state.login._id)
+    const currentPage = useSelector<AppRootStateType, number>(state => state.packs.page)
+    const pageCount = useSelector<AppRootStateType, number>(state => state.packs.pageCount)
     const [isChecked, setIsChecked] = useState<boolean>(false)
-    const [currentPage, setCurrentPage] = useState(1)
-    const [pageCount, setPageCount] = useState(20)
+    const [searchValue, setSearchValue] = useState<string>('')
 
     useEffect(() => {
-        dispatch(getCardsPackTC(currentPage, pageCount))
-    }, [currentPage, pageCount])
+        dispatch(getCardsPackTC())
+    }, [currentPage, pageCount, searchValue])
 
     const showMyPacks = () => {
         setIsChecked(!isChecked)
     }
     const addPack = () => {
-        dispatch(addNewPackTC(currentPage, pageCount))
+        dispatch(addNewPackTC())
         console.log('new pack')
     }
     const deletePack = (id: string) => {
-        dispatch(deletePackTC(id, currentPage, pageCount))
+        dispatch(deletePackTC(id))
     }
 
     const updatePack = (id: string) => {
-        dispatch(updatePackTC(id, currentPage, pageCount))
+        dispatch(updatePackTC(id))
     }
-    const showCards = (id: string) =>{
-        dispatch(getCardsTC(1,7,id))
+    const showCards = (id: string) => {
+        dispatch(getCardsTC(1, 7, id))
+    }
+    const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(e.currentTarget.value)
+        dispatch(setSearchValueAC(e.currentTarget.value))
     }
     console.log(userId)
     return (
         <div>
             List
             <div>
+                <SuperInputText onChange={onChangeSearchValue}/>
                 <SuperCheckbox onChange={showMyPacks}>
                     my packs
                 </SuperCheckbox>
@@ -76,9 +90,7 @@ export const ListPacks = () => {
                 </table>
                 <Pagination pageCount={pageCount}
                             cardPacksTotalCount={cardPacks.cardPacksTotalCount}
-                            currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}
-                            setPageCount={setPageCount}/>
+                            currentPage={currentPage}/>
             </div>
         </div>
     )
