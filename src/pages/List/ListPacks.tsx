@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from "react"
+import React, {ChangeEvent, useCallback, useEffect, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {
     PacksType,
@@ -15,6 +15,8 @@ import {Packs} from "./Packs";
 import Pagination from "../../components/Pagination/Pagination";
 import {getCardsTC} from "./cardsReducer";
 import SuperInputText from "../../components/SuperComponents/SuperInputText/SuperInputText";
+import { debounce } from 'lodash';
+
 
 export const ListPacks = () => {
     const dispatch = useDispatch()
@@ -22,19 +24,19 @@ export const ListPacks = () => {
     const userId = useSelector<AppRootStateType, string>(state => state.login._id)
     const currentPage = useSelector<AppRootStateType, number>(state => state.packs.page)
     const pageCount = useSelector<AppRootStateType, number>(state => state.packs.pageCount)
+    const searchedValue = useSelector<AppRootStateType, string>(state => state.packs.searchValue)
     const [isChecked, setIsChecked] = useState<boolean>(false)
     const [searchValue, setSearchValue] = useState<string>('')
 
     useEffect(() => {
         dispatch(getCardsPackTC())
-    }, [currentPage, pageCount, searchValue])
+    }, [currentPage, pageCount, searchedValue])
 
     const showMyPacks = () => {
         setIsChecked(!isChecked)
     }
     const addPack = () => {
         dispatch(addNewPackTC())
-        console.log('new pack')
     }
     const deletePack = (id: string) => {
         dispatch(deletePackTC(id))
@@ -48,9 +50,19 @@ export const ListPacks = () => {
     }
     const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.currentTarget.value)
-        dispatch(setSearchValueAC(e.currentTarget.value))
+
     }
-    console.log(userId)
+    const debounceDispatch = useCallback(
+        debounce(value => {
+            dispatch(setSearchValueAC(value))
+        }, 1400),
+        [],
+    );
+
+    useEffect(() => {
+        debounceDispatch(searchValue);
+    }, [searchValue]);
+
     return (
         <div>
             List

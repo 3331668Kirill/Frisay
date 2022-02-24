@@ -48,9 +48,7 @@ const initialState: PacksType = {
 export const cardsPackReducer = (state: PacksType = initialState, action: ActionsType): PacksType => {
     switch (action.type) {
         case 'SET_PACKS': {
-            let stateCopy = {...state}
-            stateCopy = action.data
-            return stateCopy
+            return {...state, ...action.data}
         }
         case "packs/SET-CURRENT-PAGE": {
             return {...state, page: action.page}

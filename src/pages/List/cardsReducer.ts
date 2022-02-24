@@ -2,7 +2,6 @@ import {Dispatch} from "redux"
 import {api} from "../../api/api";
 
 
-
 export type CardsDataType = {
     cards: CardsType[]
     id:string
@@ -40,10 +39,7 @@ const initialState = {} as CardsDataType
 export const cardsReducer = (state: CardsDataType = initialState, action: ActionsType): CardsDataType => {
     switch (action.type) {
         case 'SET_CARDS': {
-            let stateCopy = {...state}
-            stateCopy = {...action.data,id:action.id}
-            console.log(stateCopy)
-            return stateCopy
+            return {...state, ...action.data, id: action.id}
         }
         default:
             return state
