@@ -30,6 +30,7 @@ const Pagination = (props: PaginationPropsType) => {
     const pagesPortion = pages.filter(p => p >= props.currentPage - 5 && p <= props.currentPage + 5)
     // get pages for rendering
     const pagesList = pages && pagesPortion.map(p => <span
+        key={p}
         className={props.currentPage === p ? s.currentPageButton : s.pageButton}
         onClick={() => getCurrentPagePacks(p)}>{p}</span>)
     // decrease current page by one less
@@ -69,16 +70,18 @@ const Pagination = (props: PaginationPropsType) => {
                 <span onClick={nextPage}>{'>'}</span>
                 <span onClick={lastPage}>{'>>'}</span>
                 <div className={s.select}>
+                    Page:
                     <select value={props.currentPage}
                             onChange={changeCurrentPage}>
-                        {pages.map(p => <option value={p}>{p}</option>)}
+                        {pages.map(p => <option key={p} value={p}>{p}</option>)}
                     </select>
                 </div>
             </div>
             <div>
-                <select style={{width: "40", marginTop: "10px"}} value={props.pageCount}
+                Show on a Page
+                <select style={{width: "40px", marginLeft: "10px"}} value={props.pageCount}
                         onChange={onChangePageCount}>
-                    {pageCountValues.map(v => <option value={v}>{v}</option>)}
+                    {pageCountValues.map(v => <option key={v} value={v}>{v}</option>)}
                 </select>
             </div>
         </div>

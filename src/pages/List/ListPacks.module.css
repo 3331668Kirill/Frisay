@@ -1,0 +1,34 @@
+.table{
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    text-align: left;
+}
+.table tr:nth-child(2n){
+    background-color: #707070;
+}
+.table td{
+    padding: 5px;
+}
+.table th{
+    font-size: 20px;
+    padding: 5px;
+}
+.table tr th:last-child{
+    text-align: right;
+}
+.table tr td:last-child{
+    text-align: right;
+}
+
+.actions{
+    display: flex;
+    align-content: center;
+    justify-content: flex-end;
+    gap: 20px
+}
+
+.paginationBlock{
+    display: flex;
+    justify-content: space-between;
+}

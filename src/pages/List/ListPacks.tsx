@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useEffect, useState} from "react"
+import React, {ChangeEvent, useEffect, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {
     PacksType,
@@ -17,6 +17,8 @@ import {getCardsTC} from "./cardsReducer";
 import SuperInputText from "../../components/SuperComponents/SuperInputText/SuperInputText";
 import { debounce } from 'lodash';
 
+import s from   './ListPacks.module.css'
+
 
 export const ListPacks = () => {
     const dispatch = useDispatch()
@@ -26,7 +28,6 @@ export const ListPacks = () => {
     const pageCount = useSelector<AppRootStateType, number>(state => state.packs.pageCount)
     const searchedValue = useSelector<AppRootStateType, string>(state => state.packs.searchValue)
     const [isChecked, setIsChecked] = useState<boolean>(false)
-    const [searchValue, setSearchValue] = useState<string>('')
 
     useEffect(() => {
         dispatch(getCardsPackTC())
@@ -48,30 +49,25 @@ export const ListPacks = () => {
     const showCards = (id: string) => {
         dispatch(getCardsTC(1, 7, id))
     }
+
+    const debounceSetSearch = debounce(value => dispatch(setSearchValueAC(value)), 1400)
+
     const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearchValue(e.currentTarget.value)
-
+        debounceSetSearch(e.currentTarget.value)
     }
-    const debounceDispatch = useCallback(
-        debounce(value => {
-            dispatch(setSearchValueAC(value))
-        }, 1400),
-        [],
-    );
-
-    useEffect(() => {
-        debounceDispatch(searchValue);
-    }, [searchValue]);
 
     return (
         <div>
-            List
+            Search Packs
             <div>
                 <SuperInputText onChange={onChangeSearchValue}/>
                 <SuperCheckbox onChange={showMyPacks}>
                     my packs
                 </SuperCheckbox>
-                <table>
+                <Pagination pageCount={pageCount}
+                            cardPacksTotalCount={cardPacks.cardPacksTotalCount}
+                            currentPage={currentPage}/>
+                <table className={s.table}>
                     <tbody>
                     <tr>
                         <th>name</th>
@@ -80,6 +76,7 @@ export const ListPacks = () => {
                         <th>url</th>
                         <th><SuperButton onClick={addPack}> ADD </SuperButton></th>
                     </tr>
+                    {!cardPacks.cardPacks.length && <div>Packs not Found</div>}
                     {cardPacks && isChecked
                         ? cardPacks.cardPacks.filter((t) => t.user_id === userId).map((t) => {
                                 return (
@@ -100,9 +97,6 @@ export const ListPacks = () => {
                     }
                     </tbody>
                 </table>
-                <Pagination pageCount={pageCount}
-                            cardPacksTotalCount={cardPacks.cardPacksTotalCount}
-                            currentPage={currentPage}/>
             </div>
         </div>
     )
