@@ -6,7 +6,7 @@ import {
     addNewPackTC,
     deletePackTC,
     updatePackTC,
-    setSearchValueAC
+    setSearchValueAC, setPacksAC
 } from "./cardsPackReducer";
 import {AppRootStateType} from "../../redux/store";
 import SuperButton from "../../components/SuperComponents/SuperButton/SuperButton";
@@ -30,11 +30,17 @@ export const ListPacks = () => {
     const [isChecked, setIsChecked] = useState<boolean>(false)
 
     useEffect(() => {
-        dispatch(getCardsPackTC())
+        dispatch(getCardsPackTC(''))
     }, [currentPage, pageCount, searchedValue])
 
     const showMyPacks = () => {
-        setIsChecked(!isChecked)
+        if (isChecked){
+            dispatch(getCardsPackTC(''))
+            setIsChecked(!isChecked)
+        }else {
+            setIsChecked(!isChecked)
+            dispatch(getCardsPackTC(userId))
+        }
     }
     const addPack = () => {
         dispatch(addNewPackTC())
@@ -44,7 +50,7 @@ export const ListPacks = () => {
     }
 
     const updatePack = (id: string) => {
-        dispatch(updatePackTC(id))
+        dispatch(updatePackTC(id,userId))
     }
     const showCards = (id: string) => {
         dispatch(getCardsTC(1, 7, id))
@@ -76,17 +82,9 @@ export const ListPacks = () => {
                         <th>url</th>
                         <th><SuperButton onClick={addPack}> ADD </SuperButton></th>
                     </tr>
-                    {!cardPacks.cardPacks.length && <div>Packs not Found</div>}
-                    {cardPacks && isChecked
-                        ? cardPacks.cardPacks.filter((t) => t.user_id === userId).map((t) => {
-                                return (
-                                    <Packs key={t._id} id={t._id} name={t.name} deletePack={deletePack}
-                                           updated={t.updated} path={t.path} updatePack={updatePack}
-                                           cardsCount={t.cardsCount} showCards={showCards}/>
-                                )
-                            }
-                        )
-                        : cardPacks.cardPacks && cardPacks.cardPacks.map((t) => {
+
+                    { cardPacks.cardPacks && cardPacks.cardPacks.map((t) => {
+
                             return (
                                 <Packs key={t._id} id={t._id} name={t.name} deletePack={deletePack}
                                        updated={t.updated} path={t.path} updatePack={updatePack}
