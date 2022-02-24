@@ -77,11 +77,11 @@ export const setSearchValueAC = (searchName: string) => {
     return ({type: 'packs/SET-SEARCH-VALUE', searchName} as const)
 }
 
-export const getCardsPackTC = () => (dispatch: Dispatch, getState: () => AppRootStateType): void => {
+export const getCardsPackTC = (id:string) => (dispatch: Dispatch, getState: () => AppRootStateType): void => {
     const page = getState().packs.page
     const pageCount = getState().packs.pageCount
     const searchName = getState().packs.searchValue
-    api.getPacks(page, pageCount, searchName).then((res) => {
+    api.getPacks(page, pageCount, searchName,id).then((res) => {
         dispatch(setPacksAC(res.data))
     }).catch((err) => {
         console.log(err)
@@ -95,7 +95,7 @@ export const addNewPackTC = () => (dispatch: Dispatch, getState: () => AppRootSt
     const searchName = getState().packs.searchValue
     api.addNewPack().then(() => {
 
-        api.getPacks(page, pageCount, searchName).then((res) => {
+        api.getPacks(page, pageCount, searchName,'').then((res) => {
             dispatch(setPacksAC(res.data))
         })
     }).catch((err) => {
@@ -110,7 +110,7 @@ export const deletePackTC = (id: string) => (dispatch: Dispatch, getState: () =>
     const searchName = getState().packs.searchValue
     api.deletePack(id).then(() => {
 
-        api.getPacks(page, pageCount, searchName).then((res) => {
+        api.getPacks(page, pageCount, searchName,'').then((res) => {
             dispatch(setPacksAC(res.data))
         })
     }).catch((err) => {
@@ -119,13 +119,13 @@ export const deletePackTC = (id: string) => (dispatch: Dispatch, getState: () =>
     })
 }
 
-export const updatePackTC = (id: string) => (dispatch: Dispatch, getState: () => AppRootStateType): void => {
+export const updatePackTC = (id: string,userId:string) => (dispatch: Dispatch, getState: () => AppRootStateType): void => {
     const page = getState().packs.page
     const pageCount = getState().packs.pageCount
     const searchName = getState().packs.searchValue
     api.updatePack(id).then(() => {
 
-        api.getPacks(page, pageCount, searchName).then((res) => {
+        api.getPacks(page, pageCount, searchName,userId).then((res) => {
             dispatch(setPacksAC(res.data))
         })
     }).catch((err) => {

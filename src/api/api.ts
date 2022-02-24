@@ -43,8 +43,8 @@ export const api = {
     setNewPassword(data: { password: string, resetPasswordToken: string }) {
         return instance.post('auth/set-new-password', data)
     },
-    getPacks(page: number, pageCount: number, searchName: string) {
-        return instance.get(`cards/pack/?page=${page}&pageCount=${pageCount}&packName=${searchName}`)
+    getPacks(page: number, pageCount: number, searchName: string, id?:string) {
+        return instance.get(`cards/pack/?page=${page}&pageCount=${pageCount}&packName=${searchName}&user_id=${id}`)
     },
     addNewPack() {
         return instance.post('/cards/pack/', {cardsPack: {name: 'XAXAXA'}})
