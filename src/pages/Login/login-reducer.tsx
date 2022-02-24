@@ -80,7 +80,6 @@ export const logoutTC = () => (dispatch: Dispatch) => {
 export const checkMeTC = (payload: {}, setIsLoading: ReactDispatch<SetStateAction<boolean>>) => (dispatch: Dispatch) => {
     setIsLoading(true)
     api.checkMe(payload).then((res: AxiosResponse<UserInitialStateType>) => {
-        console.log(res.data)
         dispatch(CheckMeAC(res.data))
     }).catch((err) => {
         console.log(err)

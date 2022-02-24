@@ -2,6 +2,8 @@ import React from "react";
 import SuperButton from "../../components/SuperComponents/SuperButton/SuperButton";
 import {NavLink} from "react-router-dom";
 
+import s from './ListPacks.module.css'
+
 
 type PacksPropsType = {
     id: string
@@ -24,7 +26,7 @@ export const Packs = ({id, name, cardsCount, updated, path, deletePack, updatePa
                 <td>{cardsCount}</td>
                 <td>{updated}</td>
                 <td>{path}</td>
-                <td>
+                <td className={s.actions}>
                     <SuperButton onClick={() => deletePack(id)}> DEL</SuperButton>
                     <SuperButton onClick={() => updatePack(id)}> UPDATE</SuperButton>
                     <NavLink to={'/list-cards'}><div onClick={()=>showCards(id)}>Cards</div>  </NavLink>
