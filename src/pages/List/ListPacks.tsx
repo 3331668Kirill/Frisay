@@ -6,7 +6,7 @@ import {
     addNewPackTC,
     deletePackTC,
     updatePackTC,
-    setSearchValueAC, setPacksAC
+    setSearchValueAC,
 } from "./cardsPackReducer";
 import {AppRootStateType} from "../../redux/store";
 import SuperButton from "../../components/SuperComponents/SuperButton/SuperButton";

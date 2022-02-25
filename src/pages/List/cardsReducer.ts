@@ -59,8 +59,8 @@ export const getCardsTC = (page: number, pageCount: number, id: string) => (disp
     })
 }
 
-export const addNewCardTC = (page: number, pageCount: number, idPack: string) => (dispatch: Dispatch): void => {
-    api.addNewCard(idPack).then(() => {
+export const addNewCardTC = (page: number, pageCount: number, idPack: string, question:string) => (dispatch: Dispatch): void => {
+    api.addNewCard(idPack,question).then(() => {
 
         api.getCards(page, pageCount, idPack).then((res) => {
             dispatch(setCardsAC(res.data, idPack))
@@ -82,8 +82,9 @@ export const deleteCardTC = (page: number, pageCount: number,idCard: string, idP
     })
 }
 
-export const updateCardTC = (idCard: string, idPack:string, page: number, pageCount: number) => (dispatch: Dispatch): void => {
-    api.updateCard(idCard).then(() => {
+export const updateCardTC = (idCard: string, idPack:string, page: number,
+                             pageCount: number, question:string) => (dispatch: Dispatch): void => {
+    api.updateCard(idCard, question).then(() => {
 
         api.getCards(page, pageCount, idPack).then((res) => {
             dispatch(setCardsAC(res.data, idPack))
