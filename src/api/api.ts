@@ -43,6 +43,8 @@ export const api = {
     setNewPassword(data: { password: string, resetPasswordToken: string }) {
         return instance.post('auth/set-new-password', data)
     },
+
+
     getPacks(page: number, pageCount: number, searchName: string, id?:string) {
         return instance.get(`cards/pack/?page=${page}&pageCount=${pageCount}&packName=${searchName}&user_id=${id}`)
     },
@@ -59,14 +61,14 @@ export const api = {
     getCards(page: number, pageCount: number, id:string) {
         return instance.get(`/cards/card/?page=${page}&pageCount=${pageCount}&cardsPack_id=${id}`)
     },
-    addNewCard(id:string) {
-        return instance.post('/cards/card', {card: {cardsPack_id:id,question: "WHO ARE YOU?", grade: 4}})
+    addNewCard(id:string, question:string) {
+        return instance.post('/cards/card', {card: {cardsPack_id:id,question , grade: 4}})
     },
     deleteCard(id: string) {
         return instance.delete(`/cards/card?id=${id}`)
     },
-    updateCard(id: string) {
-        return instance.put(`/cards/card`, {card: {_id: id, question: 'WHAT`s GOING ON?'}})
+    updateCard(id: string, question:string) {
+        return instance.put(`/cards/card`, {card: {_id: id, question}})
     },
 }
 
